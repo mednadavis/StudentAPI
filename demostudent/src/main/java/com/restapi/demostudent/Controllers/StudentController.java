@@ -16,47 +16,36 @@ import com.restapi.demostudent.Models.BAO.Services.IstudentBAO;
 import com.restapi.demostudent.Models.POJOS.Student;
 
 @RestController
-@RequestMapping("std")
+@RequestMapping("/std")
 public class StudentController {
-	
-	IstudentBAO studBAO;
-	
-	@GetMapping("getall")
-	public List<Student> getallStudents(){
-		
-		return studBAO.getAll();
-		
-	}
-	
-	@GetMapping("getbyid/{id}")
-	public Student getByIdStudent(@PathVariable("id") int id) {
-		
-		return studBAO.getById(id);
-	}
-	
-	@PostMapping ("insert")
-	public String insertStudent(@RequestBody Student s) {
-		
-		return studBAO.insertStudent(s);
-		
-	}
-	
-	@PutMapping ("update")
-	public String updateStudent(@RequestBody Student s) {
-		
-		return studBAO.updateStudent(s);
-		
-	}
-	
-	@DeleteMapping ("delete")
-	public String updateStudent(@RequestParam int id) {
-		
-		return studBAO.deleteStudent(id);
-		
-	}
-	
-	
-	
-	
 
-}
+    private final IstudentBAO studBAO;
+
+    public StudentController(IstudentBAO studBAO) {
+        this.studBAO = studBAO;
+    }
+
+    @GetMapping("/getall")
+    public List<Student> getallStudents() {
+        return studBAO.getAll();
+    }
+
+    @GetMapping("/getbyid/{id}")
+    public Student getByIdStudent(@PathVariable("id") int id) {
+        return studBAO.getById(id);
+    }
+
+    @PostMapping("/insert")
+    public String insertStudent(@RequestBody Student s) {
+        return studBAO.insertStudent(s);
+    }
+
+    @PutMapping("/update")
+    public String updateStudent(@RequestBody Student s) {
+        return studBAO.updateStudent(s);
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteStudent(@RequestParam("id") int id) {
+        return studBAO.deleteStudent(id);
+    }
